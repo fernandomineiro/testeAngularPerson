@@ -1,0 +1,79 @@
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentPerson.id">
+    <h4>Pessoa</h4>
+    <div>
+      <label><strong>Nome:</strong></label> {{ currentPerson.nome }}
+    </div>
+    <div>
+      <label><strong>CPF:</strong></label>
+      {{ currentPerson.cpf }}
+    </div>
+    <div>
+      <label><strong>RG:</strong></label>
+      {{ currentPerson.rg}}
+    </div>
+
+    <a class="badge badge-warning"
+      routerLink="/tutorials/{{ currentPerson.id }}">
+      Edit
+    </a>
+  </div>
+
+  <div *ngIf="!currentPerson">
+    <br />
+    <p>Please click on a Tutorial...</p>
+  </div>
+</div>
+
+<ng-template #editable>
+  <div *ngIf="currentPerson.id" class="edit-form">
+    <h4>Pessoa</h4>
+    <form>
+      <div class="form-group">
+        <label for="title">Pessoa</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          [(ngModel)]="currentPerson.nome"
+          name="pessoa"
+        />
+      </div>
+      <div class="form-group">
+        <label for="description">rg</label>
+        <input
+          type="text"
+          class="form-control"
+          id="description"
+          [(ngModel)]="currentPerson.rg"
+          name="rg"
+        />
+      </div>
+
+      <div class="form-group">
+        <label><strong>CPF:</strong></label>
+      {{currentPerson.cpf}}
+      </div>
+    </form>
+
+
+
+    <button class="badge badge-danger mr-2" (click)="deletePerson()">
+      Delete
+    </button>
+
+    <button
+      type="submit"
+      class="badge badge-success mb-2"
+      (click)="updatePerson()"
+    >
+      Update
+    </button>
+    <p>{{ message }}</p>
+  </div>
+
+  <div *ngIf="!currentPerson.id">
+    <br />
+    <p>Sem serviço...</p>
+  </div>
+</ng-template>
